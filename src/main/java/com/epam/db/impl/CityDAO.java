@@ -1,18 +1,14 @@
 package com.epam.db.impl;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
 
-import com.epam.db.ICountryDAO;
-import com.epam.entities.Country;
+import com.epam.db.ICityDAO;
+import com.epam.entities.City;
 
-@Repository
-@Transactional
-public class CountryDAO implements ICountryDAO{
+public class CityDAO implements ICityDAO{
 	@Resource
     private SessionFactory sessionFactory;
 
@@ -25,10 +21,8 @@ public class CountryDAO implements ICountryDAO{
     }
     
     @Override
-    public void save(Country country) {
+    public void save(City city) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(country);
+        session.save(city);
     }
-
-
 }

@@ -4,11 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
 public class Address {
-	@Id
 	private int id;
-	@Column
 	private String content;
 	
 	public int getId() {

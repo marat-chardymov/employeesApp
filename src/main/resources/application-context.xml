@@ -35,7 +35,7 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.default_schema" >DBADMIN</prop>
+                <prop key="hibernate.default_schema">dbadmin</prop>
             </props>
         </property>
     </bean>

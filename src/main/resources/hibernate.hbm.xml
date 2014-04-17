@@ -2,13 +2,17 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.epam.entities.Country">
+	<class name="com.epam.entities.Country" table="COUNTRIES" >
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="sequence">
 				<param name="sequence">COUNTRIES_SEQ</param>
 			</generator>
 		</id>
-		<property name="name" type="string" />
+		<property name="name" type="string" >
+			<column name="NAME" length="20" not-null="true"/>
+		</property>
+
 	</class>
+	
 </hibernate-mapping>

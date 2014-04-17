@@ -3,10 +3,18 @@ package com.epam.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity
 public class Company {
-	@Column
+	private int id;
 	private String name;
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
