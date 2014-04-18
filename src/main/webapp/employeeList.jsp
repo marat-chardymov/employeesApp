@@ -18,7 +18,8 @@
 		<c:forEach var="employee" items="${emplList}">
 			<tr>
 				<td>${employee.firstName}</td>
-				<td>${employee.lastName}</td>				
+				<td>${employee.lastName}</td>	
+				<td>${employee.address.content}</td>				
 			</tr>
 		</c:forEach>
 	</table>

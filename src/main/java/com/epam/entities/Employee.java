@@ -5,6 +5,7 @@ public class Employee {
 	private int id;
 	private String firstName;
 	private String lastName;
+	private Address address;
 	
 	public Employee() {
 		super();
@@ -37,6 +38,14 @@ public class Employee {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	@Override

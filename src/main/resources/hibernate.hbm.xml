@@ -2,31 +2,45 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.epam.entities.Employee" table="EMPLOYEES" >
+	<class name="com.epam.entities.Employee" table="EMPLOYEES" batch-size="100">
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="sequence">
 				<param name="sequence">EMPLOYEES_SEQ</param>
 			</generator>
 		</id>
-		<property name="firstName" type="string" >
-			<column name="FIRST_NAME" length="20" not-null="false"/>
+		<property name="firstName" type="string">
+			<column name="FIRST_NAME" length="20" not-null="false" />
 		</property>
-		<property name="lastName" type="string" >
-			<column name="LAST_NAME" length="20" not-null="false"/>
+		<property name="lastName" type="string">
+			<column name="LAST_NAME" length="20" not-null="false" />
+		</property>
+		<many-to-one name="address" column="ADDRESS_FK" unique="true" lazy="false"
+			not-null="true" fetch="join"/>
+	</class>
+
+	<class name="com.epam.entities.Address" table="ADDRESSES">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">ADDRESSES_SEQ</param>
+			</generator>
+		</id>
+		<property name="content" type="string">
+			<column name="CONTENT" length="20" not-null="true" />
 		</property>
 	</class>
-	
-	<class name="com.epam.entities.Country" table="COUNTRIES" >
+
+	<class name="com.epam.entities.Country" table="COUNTRIES">
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="sequence">
 				<param name="sequence">COUNTRIES_SEQ</param>
 			</generator>
 		</id>
-		<property name="name" type="string" >
-			<column name="NAME" length="20" not-null="true"/>
+		<property name="name" type="string">
+			<column name="NAME" length="20" not-null="true" />
 		</property>
 	</class>
-	
+
 </hibernate-mapping>
