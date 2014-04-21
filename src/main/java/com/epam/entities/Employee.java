@@ -1,11 +1,14 @@
 package com.epam.entities;
 
+import java.util.List;
+
 
 public class Employee {
 	private int id;
 	private String firstName;
 	private String lastName;
 	private Address address;
+	private List<Company> companies;
 	
 	public Employee() {
 		super();
@@ -52,7 +55,13 @@ public class Employee {
 	public String toString() {
 		return firstName+" "+lastName;
 	}
-	
-	
+
+	public List<Company> getCompanies() {
+		return companies;
+	}
+
+	public void setCompanies(List<Company> companies) {
+		this.companies = companies;
+	}	
 
 }

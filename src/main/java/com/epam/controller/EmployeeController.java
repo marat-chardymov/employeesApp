@@ -1,6 +1,5 @@
 package com.epam.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ public class EmployeeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printEmplList(ModelMap model) {
 		List<Employee> emplList = employeeDAO.getFirst100List();
-		emplList.add(new Employee("asdf","fdsa"));
 		model.addAttribute("emplList", emplList);
 		return "employeeList";
 	}

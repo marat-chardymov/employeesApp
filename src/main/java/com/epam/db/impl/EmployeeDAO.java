@@ -31,10 +31,12 @@ public class EmployeeDAO implements IEmployeeDAO {
 
 	@Override
 	public List<Employee> getFirst100List() {
-		 Session session = sessionFactory.getCurrentSession();
-		 Query query = session.createQuery("from Employee e join fetch e.address address");
-		 query.setMaxResults(100);
-		 return query.list();
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session
+				.createQuery("FROM Employee e JOIN FETCH e.address address "
+						+ "JOIN FETCH e.companies company");
+		query.setMaxResults(10);
+		return query.list();
 	}
 
 	@Override
