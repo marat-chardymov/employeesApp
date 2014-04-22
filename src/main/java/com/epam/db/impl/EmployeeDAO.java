@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,7 +37,8 @@ public class EmployeeDAO implements IEmployeeDAO {
 						+" join fetch workplace.office office"
 						+" join fetch office.company company"
 						+" join fetch office.address address"
-						+" join fetch address.city city");
+						+" join fetch address.city city"
+						+" join fetch city.country country");
 			query.setMaxResults(100);
 			return query.list();
 	}

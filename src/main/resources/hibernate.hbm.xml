@@ -98,6 +98,11 @@
 		<property name="name" type="string">
 			<column name="NAME" length="20" not-null="true" />
 		</property>
+		
+		<many-to-one name="country" class="com.epam.entities.Country"
+			lazy="false" fetch="join">
+			<column name="COUNTRY_FK" not-null="true" />
+		</many-to-one>
 	</class>
 
 	<class name="com.epam.entities.Country" table="COUNTRIES">

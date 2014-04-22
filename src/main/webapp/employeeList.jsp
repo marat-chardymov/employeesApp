@@ -25,6 +25,7 @@
 				${workplace.office.company.name},
 				${workplace.office.address.content},
 				${workplace.office.address.city.name},
+				${workplace.office.address.city.country.name},
 				${workplace.position}
 				<br>
 					</c:forEach></td>
