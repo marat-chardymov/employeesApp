@@ -1,13 +1,14 @@
 package com.epam.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 public class City {
 
 	private int id;
 	private String name;
+
+	public City() {
+		super();
+	}
 
 	public City(String name) {
 		this.name = name;

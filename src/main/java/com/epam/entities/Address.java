@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class Address {
 	private int id;
 	private String content;
-	private Employee employee;
+	private City city;
 	
 	public int getId() {
 		return id;
@@ -21,11 +21,11 @@ public class Address {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Employee getEmployee() {
-		return employee;
+	public City getCity() {
+		return city;
 	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}	
+	public void setCity(City city) {
+		this.city = city;
+	}
 	
 }

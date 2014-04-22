@@ -24,6 +24,7 @@
 				<td><c:forEach var="workplace" items="${employee.workplaces}">
 				${workplace.office.company.name},
 				${workplace.office.address.content},
+				${workplace.office.address.city.name},
 				${workplace.position}
 				<br>
 					</c:forEach></td>

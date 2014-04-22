@@ -66,6 +66,11 @@
 		<property name="content" type="string">
 			<column name="CONTENT" length="20" not-null="true" />
 		</property>
+		
+		<many-to-one name="city" class="com.epam.entities.City"
+			lazy="false" fetch="join">
+			<column name="CITY_FK" not-null="true" />
+		</many-to-one>
 	</class>
 
 	<class name="com.epam.entities.Office" table="OFFICES">
@@ -81,6 +86,18 @@
 		</many-to-one>
 		<many-to-one name="address" column="ADDRESS_ID" unique="true"
 			lazy="false" not-null="true" fetch="join" />
+	</class>
+	
+	<class name="com.epam.entities.City" table="CITIES">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">CITIES_SEQ</param>
+			</generator>
+		</id>
+		<property name="name" type="string">
+			<column name="NAME" length="20" not-null="true" />
+		</property>
 	</class>
 
 	<class name="com.epam.entities.Country" table="COUNTRIES">
