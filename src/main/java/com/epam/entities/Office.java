@@ -4,6 +4,7 @@ public class Office {
 	
 	private int id;	
 	private Company company;
+	private Address address;
 
 	public Office() {
 		super();
@@ -24,6 +25,13 @@ public class Office {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-	
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}	
 	
 }

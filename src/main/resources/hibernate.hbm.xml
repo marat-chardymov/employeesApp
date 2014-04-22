@@ -79,6 +79,8 @@
 			lazy="false" fetch="join">
 			<column name="COMPANY_ID" not-null="true" />
 		</many-to-one>
+		<many-to-one name="address" column="ADDRESS_ID" unique="true"
+			lazy="false" not-null="true" fetch="join" />
 	</class>
 
 	<class name="com.epam.entities.Country" table="COUNTRIES">

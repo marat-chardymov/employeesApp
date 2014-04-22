@@ -36,7 +36,8 @@ public class EmployeeDAO implements IEmployeeDAO {
 				.createQuery("from Employee e join fetch e.address"
 						+" left join fetch e.workplaces workplace"
 						+" join fetch workplace.office office"
-						+" join fetch office.company company");
+						+" join fetch office.company company"
+						+" join fetch office.address address");
 			query.setMaxResults(100);
 			return query.list();
 	}
