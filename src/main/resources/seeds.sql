@@ -44,3 +44,18 @@ select
   round(dbms_random.value(1, 10001))
 from dual
 connect by level <= 5000;
+
+insert into OFFICES (COMPANY_ID,ADDRESS_ID)
+select 
+  round(dbms_random.value(1, 10001)),
+  round(dbms_random.value(1, 10001))
+from dual
+connect by level <= 5000;
+
+insert into WORKPLACES (EMPLOYEE_ID,OFFICE_ID,POSITION)
+select 
+  round(dbms_random.value(10002, 20002)),
+  round(dbms_random.value(10002, 20002)),
+  'position ' || to_char(rownum)
+from dual
+connect by level <= 5000;

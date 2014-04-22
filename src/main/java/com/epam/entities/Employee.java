@@ -1,6 +1,6 @@
 package com.epam.entities;
 
-import java.util.List;
+import java.util.Set;
 
 
 public class Employee {
@@ -8,7 +8,7 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private Address address;
-	private List<Company> companies;
+	private Set<Workplace> workplaces;
 	
 	public Employee() {
 		super();
@@ -56,12 +56,11 @@ public class Employee {
 		return firstName+" "+lastName;
 	}
 
-	public List<Company> getCompanies() {
-		return companies;
+	public Set<Workplace> getWorkplaces() {
+		return workplaces;
 	}
 
-	public void setCompanies(List<Company> companies) {
-		this.companies = companies;
-	}	
-
+	public void setWorkplaces(Set<Workplace> workplaces) {
+		this.workplaces = workplaces;
+	}
 }
