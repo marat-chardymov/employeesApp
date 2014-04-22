@@ -75,6 +75,10 @@
 				<param name="sequence">OFFICES_SEQ</param>
 			</generator>
 		</id>
+		<many-to-one name="company" class="com.epam.entities.Company"
+			lazy="false" fetch="join">
+			<column name="COMPANY_ID" not-null="true" />
+		</many-to-one>
 	</class>
 
 	<class name="com.epam.entities.Country" table="COUNTRIES">

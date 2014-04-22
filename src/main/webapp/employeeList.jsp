@@ -22,7 +22,7 @@
 				<td>${employee.lastName}</td>
 				<td>${employee.address.content}</td>
 				<td><c:forEach var="workplace" items="${employee.workplaces}">
-				${workplace.office},
+				${workplace.office.company.name},
 				${workplace.position}
 				<br>
 					</c:forEach></td>

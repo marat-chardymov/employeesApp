@@ -33,9 +33,10 @@ public class EmployeeDAO implements IEmployeeDAO {
 	public List<Employee> getFirst100List() {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session
-				.createQuery("from Employee e join fetch e.address "
-						+"left join fetch e.workplaces workplace "
-						+"join fetch workplace.office office");
+				.createQuery("from Employee e join fetch e.address"
+						+" left join fetch e.workplaces workplace"
+						+" join fetch workplace.office office"
+						+" join fetch office.company company");
 			query.setMaxResults(100);
 			return query.list();
 	}
