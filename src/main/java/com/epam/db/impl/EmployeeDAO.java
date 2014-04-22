@@ -34,7 +34,8 @@ public class EmployeeDAO implements IEmployeeDAO {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session
 				.createQuery("from Employee e join fetch e.address "
-						+"left join fetch e.workplaces workplace");
+						+"left join fetch e.workplaces workplace "
+						+"join fetch workplace.office office");
 			query.setMaxResults(100);
 			return query.list();
 	}

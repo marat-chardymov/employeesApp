@@ -14,7 +14,7 @@
 			<th>First name</th>
 			<th>Last name</th>
 			<th>Address</th>
-			<th>Workplace</th>
+			<th>Offices</th>
 		</tr>
 		<c:forEach var="employee" items="${emplList}">
 			<tr>
@@ -22,6 +22,7 @@
 				<td>${employee.lastName}</td>
 				<td>${employee.address.content}</td>
 				<td><c:forEach var="workplace" items="${employee.workplaces}">
+				${workplace.office},
 				${workplace.position}
 				<br>
 					</c:forEach></td>

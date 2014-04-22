@@ -18,18 +18,18 @@
 		</property>
 
 		<many-to-one name="address" column="ADDRESS_FK" unique="true"
-			lazy="false" not-null="true" fetch="join" />	
-			
+			lazy="false" not-null="true" fetch="join" />
+
 		<set name="workplaces" table="WORKPLACES" lazy="false" fetch="join">
 			<key>
 				<column name="EMPLOYEE_ID" not-null="true" />
 			</key>
-			<one-to-many entity-name="com.epam.entities.Workplace"/>
-		</set>	
+			<one-to-many entity-name="com.epam.entities.Workplace" />
+		</set>
 	</class>
-	
-	<class name="com.epam.entities.Workplace" table="WORKPLACES">	
-	<id name="id" type="int">
+
+	<class name="com.epam.entities.Workplace" table="WORKPLACES">
+		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="sequence">
 				<param name="sequence">WORKPLACES_SEQ</param>
@@ -38,8 +38,12 @@
 		<property name="position" type="string">
 			<column name="POSITION" length="20" not-null="true" />
 		</property>
+		<many-to-one name="office" class="com.epam.entities.Office"
+			lazy="false" fetch="join">
+			<column name="OFFICE_ID" not-null="true" />
+		</many-to-one>
 	</class>
-	
+
 	<class name="com.epam.entities.Company" table="COMPANIES">
 		<id name="id" type="int">
 			<column name="ID" />
@@ -63,7 +67,7 @@
 			<column name="CONTENT" length="20" not-null="true" />
 		</property>
 	</class>
-	
+
 	<class name="com.epam.entities.Office" table="OFFICES">
 		<id name="id" type="int">
 			<column name="ID" />
@@ -72,7 +76,7 @@
 			</generator>
 		</id>
 	</class>
-	
+
 	<class name="com.epam.entities.Country" table="COUNTRIES">
 		<id name="id" type="int">
 			<column name="ID" />
