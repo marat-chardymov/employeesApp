@@ -20,7 +20,10 @@
 			<tr>
 				<td>${employee.firstName}</td>
 				<td>${employee.lastName}</td>
-				<td>${employee.address.content}</td>
+				<td>${employee.address.content},
+					${employee.address.city.name},
+					${employee.address.city.country.name}
+				</td>
 				<td><c:forEach var="workplace" items="${employee.workplaces}">
 				${workplace.office.company.name},
 				${workplace.office.address.content},

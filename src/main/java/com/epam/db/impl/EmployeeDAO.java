@@ -5,9 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
-import org.hibernate.Query;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
 import com.epam.db.IEmployeeDAO;
@@ -31,16 +33,11 @@ public class EmployeeDAO implements IEmployeeDAO {
 	@Override
 	public List<Employee> getFirst100List() {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session
-				.createQuery("from Employee e join fetch e.address"
-						+" left join fetch e.workplaces workplace"
-						+" join fetch workplace.office office"
-						+" join fetch office.company company"
-						+" join fetch office.address address"
-						+" join fetch address.city city"
-						+" join fetch city.country country");
-			query.setMaxResults(100);
-			return query.list();
+		Criteria criteria = session.createCriteria(Employee.class);
+		criteria.addOrder(Order.asc("id"));
+		criteria.setFirstResult(0);
+		criteria.setMaxResults(100);
+		return criteria.list();
 	}
 
 	@Override
