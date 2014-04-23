@@ -29,6 +29,8 @@
 				${workplace.office.address.content},
 				${workplace.office.address.city.name},
 				${workplace.office.address.city.country.name},
+				office id = ${workplace.office.id},
+				headcount = ${workplace.office.employeeCount},
 				${workplace.position}
 				<br>
 					</c:forEach></td>

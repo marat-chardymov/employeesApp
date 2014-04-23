@@ -20,7 +20,8 @@
 		<many-to-one name="address" column="ADDRESS_FK" unique="true"
 			lazy="false" not-null="true" fetch="join" />
 
-		<set name="workplaces" table="WORKPLACES" lazy="false" fetch="subselect" batch-size="300">
+		<set name="workplaces" table="WORKPLACES" lazy="false" fetch="join"
+			batch-size="300">
 			<key>
 				<column name="EMPLOYEE_ID" not-null="true" />
 			</key>
@@ -66,7 +67,7 @@
 		<property name="content" type="string">
 			<column name="CONTENT" length="20" not-null="true" />
 		</property>
-		
+
 		<many-to-one name="city" class="com.epam.entities.City"
 			lazy="false" fetch="join">
 			<column name="CITY_FK" not-null="true" />
@@ -86,8 +87,10 @@
 		</many-to-one>
 		<many-to-one name="address" column="ADDRESS_ID" unique="true"
 			lazy="false" not-null="true" fetch="join" />
+		<property name="employeeCount" type="int"
+			formula="(select COUNT(*) from WORKPLACES workplace where workplace.OFFICE_ID = ID)" />
 	</class>
-	
+
 	<class name="com.epam.entities.City" table="CITIES">
 		<id name="id" type="int">
 			<column name="ID" />
@@ -98,7 +101,7 @@
 		<property name="name" type="string">
 			<column name="NAME" length="20" not-null="true" />
 		</property>
-		
+
 		<many-to-one name="country" class="com.epam.entities.Country"
 			lazy="false" fetch="join">
 			<column name="COUNTRY_FK" not-null="true" />

@@ -10,6 +10,7 @@ import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Subqueries;
 import org.springframework.stereotype.Repository;
 
 import com.epam.db.IEmployeeDAO;
@@ -34,6 +35,7 @@ public class EmployeeDAO implements IEmployeeDAO {
 	public List<Employee> getFirst100List() {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Employee.class);
+		criteria.setFetchMode("Workplace", FetchMode.JOIN);
 		criteria.addOrder(Order.asc("id"));
 		criteria.setFirstResult(0);
 		criteria.setMaxResults(100);
