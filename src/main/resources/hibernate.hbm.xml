@@ -20,8 +20,7 @@
 		<many-to-one name="address" column="ADDRESS_FK" unique="true"
 			lazy="false" not-null="true" fetch="join" />
 
-		<set name="workplaces" table="WORKPLACES" lazy="false" fetch="join"
-			batch-size="300">
+		<set name="workplaces" table="WORKPLACES" lazy="false" batch-size="100">
 			<key>
 				<column name="EMPLOYEE_ID" not-null="true" />
 			</key>

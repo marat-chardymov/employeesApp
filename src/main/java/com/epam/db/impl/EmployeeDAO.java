@@ -35,7 +35,6 @@ public class EmployeeDAO implements IEmployeeDAO {
 	public List<Employee> getFirst100List() {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Employee.class);
-		criteria.setFetchMode("Workplace", FetchMode.JOIN);
 		criteria.addOrder(Order.asc("id"));
 		criteria.setFirstResult(0);
 		criteria.setMaxResults(100);
