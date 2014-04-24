@@ -31,20 +31,6 @@ select
 from dual
 connect by level <= 10000;
 
-insert into COMPANIES_EMPLOYEES (COMPANY_ID,EMPLOYEE_ID)
-select 
-  round(dbms_random.value(1, 10001)),
-  round(dbms_random.value(10002, 20002))
-from dual
-connect by level <= 10000;
-
-insert into COMPANIES_ADDRESSES(COMPANY_ID,ADDRESS_ID)
-select 
-  round(dbms_random.value(1, 10001)),
-  round(dbms_random.value(1, 10001))
-from dual
-connect by level <= 5000;
-
 insert into OFFICES (COMPANY_ID,ADDRESS_ID)
 select 
   round(dbms_random.value(1, 10001)),
@@ -59,3 +45,7 @@ select
   'position ' || to_char(rownum)
 from dual
 connect by level <= 5000;
+
+UPDATE WORKPLACE
+SET POSITION_ID=round(dbms_random.value(1, 20))
+WHERE POSITION_ID is Null;

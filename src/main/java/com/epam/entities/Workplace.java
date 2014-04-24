@@ -3,7 +3,7 @@ package com.epam.entities;
 public class Workplace {
 	
 	private int id;	
-	private String position;
+	private Position position;
 	private Office office;
 
 	public int getId() {
@@ -14,11 +14,11 @@ public class Workplace {
 		this.id = id;
 	}		
 	
-	public String getPosition() {
+	public Position getPosition() {
 		return position;
 	}
 
-	public void setPosition(String position) {
+	public void setPosition(Position position) {
 		this.position = position;
 	}
 
@@ -28,7 +28,6 @@ public class Workplace {
 
 	public void setOffice(Office office) {
 		this.office = office;
-	}
-	
+	}	
 	
 }

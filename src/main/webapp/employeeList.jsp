@@ -31,7 +31,7 @@
 				${workplace.office.address.city.country.name},
 				office id = ${workplace.office.id},
 				headcount = ${workplace.office.employeeCount},
-				${workplace.position}
+				${workplace.position.name}
 				<br>
 					</c:forEach></td>
 			</tr>
