@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.epam.entities.Employee" table="EMPLOYEES"
+	<class name="com.epam.entities.Employee" table="EMPLOYEE"
 		batch-size="100">
 		<id name="id" type="int">
 			<column name="ID" />
@@ -17,10 +17,10 @@
 			<column name="LAST_NAME" length="20" not-null="false" />
 		</property>
 
-		<many-to-one name="address" column="ADDRESS_FK" unique="true"
+		<many-to-one name="address" column="ADDRESS_ID" unique="true"
 			lazy="false" not-null="true" fetch="join" />
 
-		<set name="workplaces" table="WORKPLACES" lazy="false" batch-size="100">
+		<set name="workplaces" table="WORKPLACE" lazy="false" batch-size="100" >
 			<key>
 				<column name="EMPLOYEE_ID" not-null="true" />
 			</key>
@@ -28,7 +28,7 @@
 		</set>
 	</class>
 
-	<class name="com.epam.entities.Workplace" table="WORKPLACES">
+	<class name="com.epam.entities.Workplace" table="WORKPLACE">
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="sequence">
@@ -44,7 +44,7 @@
 		</many-to-one>
 	</class>
 
-	<class name="com.epam.entities.Company" table="COMPANIES">
+	<class name="com.epam.entities.Company" table="COMPANY">
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="sequence">
@@ -56,7 +56,7 @@
 		</property>
 	</class>
 
-	<class name="com.epam.entities.Address" table="ADDRESSES">
+	<class name="com.epam.entities.Address" table="ADDRESS">
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="sequence">
@@ -69,11 +69,11 @@
 
 		<many-to-one name="city" class="com.epam.entities.City"
 			lazy="false" fetch="join">
-			<column name="CITY_FK" not-null="true" />
+			<column name="CITY_ID" not-null="true" />
 		</many-to-one>
 	</class>
 
-	<class name="com.epam.entities.Office" table="OFFICES">
+	<class name="com.epam.entities.Office" table="OFFICE">
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="sequence">
@@ -87,10 +87,10 @@
 		<many-to-one name="address" column="ADDRESS_ID" unique="true"
 			lazy="false" not-null="true" fetch="join" />
 		<property name="employeeCount" type="int"
-			formula="(select COUNT(*) from WORKPLACES workplace where workplace.OFFICE_ID = ID)" />
+			formula="(select COUNT(*) from WORKPLACE workplace where workplace.OFFICE_ID = ID)" />
 	</class>
 
-	<class name="com.epam.entities.City" table="CITIES">
+	<class name="com.epam.entities.City" table="CITY">
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="sequence">
@@ -103,11 +103,11 @@
 
 		<many-to-one name="country" class="com.epam.entities.Country"
 			lazy="false" fetch="join">
-			<column name="COUNTRY_FK" not-null="true" />
+			<column name="COUNTRY_ID" not-null="true" />
 		</many-to-one>
 	</class>
 
-	<class name="com.epam.entities.Country" table="COUNTRIES">
+	<class name="com.epam.entities.Country" table="COUNTRY">
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="sequence">

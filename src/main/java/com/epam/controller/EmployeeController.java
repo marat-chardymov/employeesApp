@@ -13,14 +13,14 @@ import com.epam.entities.Employee;
 
 @Controller
 @RequestMapping("/")
-public class EmployeeController {
+public final class EmployeeController {
 	
 	@Autowired
     private IEmployeeDAO employeeDAO;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String printEmplList(ModelMap model) {
-		List<Employee> emplList = employeeDAO.getFirst100List();
+		List<Employee> emplList = employeeDAO.getList();
 		model.addAttribute("emplList", emplList);
 		return "employeeList";
 	}
