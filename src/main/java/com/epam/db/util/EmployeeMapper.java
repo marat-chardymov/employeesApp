@@ -15,23 +15,23 @@ public class EmployeeMapper implements RowMapper<Employee> {
 	@Override
 	public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Employee employee = new Employee();
-		employee.setId(rs.getInt("employee.id"));
-		employee.setFirstName(rs.getString("employee.first_name"));
-		employee.setLastName(rs.getString("employee.last_name"));
+		employee.setId(rs.getInt("e_id"));
+		employee.setFirstName(rs.getString("e_first_name"));
+		employee.setLastName(rs.getString("e_last_name"));
 
 		Address address = new Address();
-		address.setId(rs.getInt("address.id"));
-		address.setContent(rs.getString("address.content"));
+		address.setId(rs.getInt("address_id"));
+		address.setContent(rs.getString("address_content"));
 		employee.setAddress(address);
 
 		City city = new City();
-		city.setId(rs.getInt("city.id"));
-		city.setName(rs.getString("city.name"));
+		city.setId(rs.getInt("city_id"));
+		city.setName(rs.getString("city_name"));
 		address.setCity(city);
 
 		Country country = new Country();
-		country.setId(rs.getInt("country.id"));
-		country.setName(rs.getString("country.name"));
+		country.setId(rs.getInt("country_id"));
+		country.setName(rs.getString("country_name"));
 		city.setCountry(country);
 
 		return employee;		

@@ -53,7 +53,9 @@
 	</bean>
 	
 	<!-- JDBC config -->
-	
+	<bean id="employeeJdbcDAO" class="com.epam.db.impl.EmployeeJdbcDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 	<!-- transactions managers -->
 	<tx:annotation-driven transaction-manager="hibernateTransactionManager" />
