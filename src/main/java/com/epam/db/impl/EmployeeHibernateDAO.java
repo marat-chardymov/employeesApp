@@ -16,7 +16,7 @@ import com.epam.entities.Employee;
 
 @Repository
 @Transactional
-public class EmployeeDAO implements IEmployeeDAO {
+public class EmployeeHibernateDAO implements IEmployeeDAO {
 
 	@Resource
 	private SessionFactory sessionFactory;
@@ -30,12 +30,12 @@ public class EmployeeDAO implements IEmployeeDAO {
 	}
 
 	@Override
-	public List<Employee> getList() {
+	public List<Employee> getList(int begin,int numberOfElements) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Employee.class);
 		criteria.addOrder(Order.asc("id"));
-		criteria.setFirstResult(0);
-		criteria.setMaxResults(100);
+		criteria.setFirstResult(begin);
+		criteria.setMaxResults(numberOfElements);
 		return criteria.list();
 	}
 

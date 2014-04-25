@@ -20,7 +20,7 @@ public final class EmployeeController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String printEmplList(ModelMap model) {
-		List<Employee> emplList = employeeDAO.getList();
+		List<Employee> emplList = employeeDAO.getList(0,100);
 		model.addAttribute("emplList", emplList);
 		return "employeeList";
 	}
