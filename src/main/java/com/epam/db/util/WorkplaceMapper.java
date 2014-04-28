@@ -18,35 +18,36 @@ public class WorkplaceMapper implements RowMapper<Workplace> {
 	@Override
 	public Workplace mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Workplace workplace = new Workplace();
+		workplace.setId(rs.getInt("w_ID"));
 
 		Position position = new Position();
-		position.setId(rs.getInt("position.id"));
-		position.setName(rs.getString("position.name"));
+		position.setId(rs.getInt("p_ID"));
+		position.setName(rs.getString("p_NAME"));
 		workplace.setPosition(position);
 
 		Office office = new Office();
-		office.setId(rs.getInt("office.id"));
-		office.setEmployeeCount(rs.getInt("office.headcount"));
+		office.setId(rs.getInt("o_ID"));
+		office.setEmployeeCount(rs.getInt("o_headcount"));
 		workplace.setOffice(office);
 
 		Company company = new Company();
-		company.setId(rs.getInt("company.id"));
-		company.setName(rs.getString("company.name"));
+		company.setId(rs.getInt("c_ID"));
+		company.setName(rs.getString("c_NAME"));
 		office.setCompany(company);
 
 		Address address = new Address();
-		address.setId(rs.getInt("address.id"));
-		address.setContent(rs.getString("address.content"));
+		address.setId(rs.getInt("a_ID"));
+		address.setContent(rs.getString("a_CONTENT"));
 		office.setAddress(address);
 
 		City city = new City();
-		city.setId(rs.getInt("city.id"));
-		city.setName(rs.getString("city.name"));
+		city.setId(rs.getInt("city_ID"));
+		city.setName(rs.getString("city_NAME"));
 		address.setCity(city);
 
 		Country country=new Country();
-		country.setId(rs.getInt("country.id"));
-		country.setName(rs.getString("country.name"));
+		country.setId(rs.getInt("country_ID"));
+		country.setName(rs.getString("country_NAME"));
 		city.setCountry(country);
 		
 		return workplace;

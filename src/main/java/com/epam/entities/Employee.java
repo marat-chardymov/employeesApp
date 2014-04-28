@@ -1,15 +1,15 @@
 package com.epam.entities;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
-
 
 public class Employee {
 	private int id;
 	private String firstName;
 	private String lastName;
 	private Address address;
-	private Set<Workplace> workplaces;
-	
+	private Set<Workplace> workplaces = new LinkedHashSet<Workplace>();
+
 	public Employee() {
 		super();
 	}
@@ -53,7 +53,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return firstName+" "+lastName;
+		return firstName + " " + lastName;
 	}
 
 	public Set<Workplace> getWorkplaces() {
