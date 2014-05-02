@@ -23,7 +23,7 @@ public final class EmployeeController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String printEmplList(ModelMap model) throws SQLException {
-		List<Employee> emplList = employeeDAO.getList(0,100);
+		List<Employee> emplList = employeeDAO.getList(0,10);
 		model.addAttribute("emplList", emplList);
 		return "employeeList";
 	}
