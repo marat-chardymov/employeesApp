@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -71,7 +71,7 @@ public class EmployeeJdbcDAO implements IEmployeeDAO {
 		PreparedStatement ps2 = null;
 		ResultSet rs1 = null;
 		ResultSet rs2 = null;
-		Map<Integer, Employee> employeeMap = new HashMap<Integer, Employee>();
+		LinkedHashMap<Integer, Employee> employeeMap = new LinkedHashMap<Integer, Employee>();
 		try {
 			conn = dataSource.getConnection();
 			ps1 = conn.prepareStatement(EMPLOYEES_SQL);
