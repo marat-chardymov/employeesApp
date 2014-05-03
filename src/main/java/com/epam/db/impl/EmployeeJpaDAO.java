@@ -16,16 +16,9 @@ import com.epam.entities.Employee;
 @Transactional
 public class EmployeeJpaDAO implements IEmployeeDAO {
 
-	private static final String FIND_All_SQL = "SELECT e FROM Employee e"
+	private static final String FIND_EMPLOYEES = "SELECT e FROM Employee e"
 			+ " LEFT JOIN FETCH e.address a"
 			+ " LEFT JOIN FETCH a.city city LEFT JOIN FETCH city.country country"
-//			+ " LEFT JOIN FETCH e.workplaces workplace"
-//			+ " LEFT JOIN FETCH workplace.position position"
-//			+ " LEFT JOIN FETCH workplace.office office"
-//			+ " LEFT JOIN FETCH office.company company"
-//			+ " LEFT JOIN FETCH office.address office_address"
-//			+ " LEFT JOIN FETCH office_address.city office_city"
-//			+ " LEFT JOIN FETCH office_city.country office_country"
 			+ " ORDER BY e.id";
 
 	@PersistenceContext
@@ -33,11 +26,10 @@ public class EmployeeJpaDAO implements IEmployeeDAO {
 
 	@Override
 	public List<Employee> getList(int begin, int numberOfElements) {
-		Query query = em.createQuery(FIND_All_SQL);
+		Query query = em.createQuery(FIND_EMPLOYEES);
 		query.setFirstResult(begin);
 		query.setMaxResults(numberOfElements);
 		return query.getResultList();
-
 	}
 
 }

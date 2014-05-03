@@ -9,31 +9,55 @@
 <link rel="stylesheet" href="css/emplList.css" />
 </head>
 <body>
-	<table class="table">
-		<tr>
-			<th>First name</th>
-			<th>Last name</th>
-			<th>Address</th>
-			<th>Offices</th>
-		</tr>
-		<c:forEach var="employee" items="${emplList}">
+	<div class="container">
+		<div class="row" id="pageBar">
+			<div class="col-md-2"></div>
+			<div class="col-md-4">
+				<ul class="pagination" id="pages">
+					<li><a href="#">&laquo;</a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">&raquo;</a></li>
+				</ul>
+			</div>
+			<div class="col-md-6">
+				<label for="itemsPerPage" id="itemsPerPageLabel">items per
+					page</label> <input type="text" id="itemsPerPage" class="numberInput"
+					name="itemsPerPage"> <label for="pageNumber" id="pageNumberLabel">page #</label>
+				<input type="text" id="pageNumber" class="numberInput"
+					name="pageNumber"> <input type="submit"
+					class="btn btn-default" id="goBtn" value="Go">
+			</div>
+		</div>
+
+		<table class="table table-bordered">
 			<tr>
-				<td>${employee.firstName}</td>
-				<td>${employee.lastName}</td>
-				<td>${employee.address.content},${employee.address.city.name},
-					${employee.address.city.country.name}</td>
-				<td><c:forEach var="workplace" items="${employee.workplaces}">
+				<th>First name</th>
+				<th>Last name</th>
+				<th>Address</th>
+				<th>Offices</th>
+			</tr>
+			<c:forEach var="employee" items="${emplList}">
+				<tr>
+					<td>${employee.firstName}</td>
+					<td>${employee.lastName}</td>
+					<td>${employee.address.content},${employee.address.city.name},
+						${employee.address.city.country.name}</td>
+					<td><c:forEach var="workplace" items="${employee.workplaces}">
 				${workplace.office.company.name},
 				${workplace.office.address.content},
 				${workplace.office.address.city.name},
 				${workplace.office.address.city.country.name},
-				office id = ${workplace.office.id},
 				headcount = ${workplace.office.employeeCount},
 				${workplace.position.name}
 				<br>
-					</c:forEach></td> 
-			</tr>
-		</c:forEach>
-	</table>
+						</c:forEach></td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 </body>
 </html>
