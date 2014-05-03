@@ -22,7 +22,7 @@
 				<td>${employee.lastName}</td>
 				<td>${employee.address.content},${employee.address.city.name},
 					${employee.address.city.country.name}</td>
-				<%-- <td><c:forEach var="workplace" items="${employee.workplaces}">
+				<td><c:forEach var="workplace" items="${employee.workplaces}">
 				${workplace.office.company.name},
 				${workplace.office.address.content},
 				${workplace.office.address.city.name},
@@ -31,7 +31,7 @@
 				headcount = ${workplace.office.employeeCount},
 				${workplace.position.name}
 				<br>
-					</c:forEach></td> --%>
+					</c:forEach></td> 
 			</tr>
 		</c:forEach>
 	</table>

@@ -2,10 +2,19 @@ package com.epam.entities;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+@Entity
 public class Company {
+	@Id
+	@SequenceGenerator(name = "COMPANIES_SEQ", sequenceName = "COMPANIES_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COMPANIES_SEQ")
 	private int id;
 	private String name;
-	private List<Employee> employees;
 	
 	public int getId() {
 		return id;
@@ -21,14 +30,5 @@ public class Company {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Employee> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
-	}
-	
+	}	
 }

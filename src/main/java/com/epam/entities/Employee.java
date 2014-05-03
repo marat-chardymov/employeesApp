@@ -1,5 +1,8 @@
 package com.epam.entities;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,9 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -31,7 +36,10 @@ public class Employee {
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 
-	// private Set<Workplace> workplaces = new LinkedHashSet<Workplace>();
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "EMPLOYEE_ID")
+	@BatchSize(size = 100)
+	private Set<Workplace> workplaces = new LinkedHashSet<Workplace>();
 
 	public Employee() {
 		super();
@@ -79,11 +87,11 @@ public class Employee {
 		return firstName + " " + lastName;
 	}
 
-	// public Set<Workplace> getWorkplaces() {
-	// return workplaces;
-	// }
-	//
-	// public void setWorkplaces(Set<Workplace> workplaces) {
-	// this.workplaces = workplaces;
-	// }
+	public Set<Workplace> getWorkplaces() {
+		return workplaces;
+	}
+
+	public void setWorkplaces(Set<Workplace> workplaces) {
+		this.workplaces = workplaces;
+	}	
 }
