@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Formula;
+
 @Entity
 public class Office {
 	@Id
@@ -24,8 +26,8 @@ public class Office {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
-	
-	@Transient
+		
+	@Formula("(select count(*) from workplace workplace where workplace.office_id=id)")
 	private int employeeCount;
 	
 	public Office() {
