@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.epam.db.IEmployeeDAO;
 import com.epam.entities.Employee;
@@ -16,14 +17,20 @@ import com.epam.entities.Employee;
 @Controller
 @RequestMapping("/")
 public final class EmployeeController {
-	
+
 	@Autowired
 	@Qualifier("employeeJpaDAO")
-    private IEmployeeDAO employeeDAO;
-	
+	private IEmployeeDAO employeeDAO;
+
 	@RequestMapping(method = RequestMethod.GET)
-	public String printEmplList(ModelMap model) throws SQLException {
-		List<Employee> emplList = employeeDAO.getList(0,100);
+	public String printEmplList(
+			@RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "itemsPerPage", defaultValue = "100") int itemsPerPage,
+			ModelMap model) throws SQLException {
+		System.out.println(page);
+		model.addAttribute("currPage", page);
+		System.out.println(itemsPerPage);
+		List<Employee> emplList = employeeDAO.getList((page-1)*itemsPerPage, 100);
 		model.addAttribute("emplList", emplList);
 		return "employeeList";
 	}

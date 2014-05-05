@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="paginator" uri="/WEB-INF/tlds/paginator.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,12 +12,12 @@
 </head>
 <body>
 	<div class="container">
-		<div class="row" id="pageBar">
+		<div class="row" class="pageBar">
 			<div class="col-md-2"></div>
 			<div class="col-md-4">
 				<ul class="pagination" id="pages">
 					<li><a href="#">&laquo;</a></li>
-					<li><a href="#">1</a></li>
+					<li class="active"><a href="#">1</a></li>
 					<li><a href="#">2</a></li>
 					<li><a href="#">3</a></li>
 					<li><a href="#">4</a></li>
@@ -26,13 +28,19 @@
 			<div class="col-md-6">
 				<label for="itemsPerPage" id="itemsPerPageLabel">items per
 					page</label> <input type="text" id="itemsPerPage" class="numberInput"
-					name="itemsPerPage"> <label for="pageNumber" id="pageNumberLabel">page #</label>
-				<input type="text" id="pageNumber" class="numberInput"
-					name="pageNumber"> <input type="submit"
-					class="btn btn-default" id="goBtn" value="Go">
+					name="itemsPerPage"> <label for="pageNumber"
+					id="pageNumberLabel">page #</label> <input type="text"
+					id="pageNumber" class="numberInput" name="pageNumber"> <input
+					type="submit" class="btn btn-default" id="goBtn" value="Go">
 			</div>
 		</div>
+		<div class="row" class="pageBar">
+			<c:url var="searchUri"
+				value="/?page=##" />
+			<paginator:display maxLinks="5" currPage="${currPage}"
+				totalPages="${10}" uri="${searchUri}" />
 
+		</div>
 		<table class="table table-bordered">
 			<tr>
 				<th>First name</th>
