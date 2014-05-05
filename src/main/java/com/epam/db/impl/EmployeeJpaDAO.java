@@ -20,6 +20,7 @@ public class EmployeeJpaDAO implements IEmployeeDAO {
 			+ " LEFT JOIN FETCH e.address a"
 			+ " LEFT JOIN FETCH a.city city LEFT JOIN FETCH city.country country"
 			+ " ORDER BY e.id";
+	private static final String COUNT_RECORDS="SELECT COUNT(*) FROM Employee e";
 
 	@PersistenceContext
 	private EntityManager em;
@@ -30,6 +31,12 @@ public class EmployeeJpaDAO implements IEmployeeDAO {
 		query.setFirstResult(begin);
 		query.setMaxResults(numberOfElements);
 		return query.getResultList();
+	}
+
+	@Override
+	public int countRecords() {
+		Query query = em.createQuery(COUNT_RECORDS);
+		return ((Long)query.getSingleResult()).intValue();
 	}
 
 }

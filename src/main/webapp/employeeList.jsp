@@ -12,34 +12,14 @@
 </head>
 <body>
 	<div class="container">
-		<div class="row" class="pageBar">
+		<div class="row paginationRow">
 			<div class="col-md-2"></div>
-			<div class="col-md-4">
-				<ul class="pagination" id="pages">
-					<li><a href="#">&laquo;</a></li>
-					<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">&raquo;</a></li>
-				</ul>
+			<div class="col-md-8">
+				<c:url var="searchUri" value="/?page=##" />
+				<paginator:display maxLinks="5" currPage="${currPage}"
+					totalPages="${totalPages}" uri="${searchUri}" />
 			</div>
-			<div class="col-md-6">
-				<label for="itemsPerPage" id="itemsPerPageLabel">items per
-					page</label> <input type="text" id="itemsPerPage" class="numberInput"
-					name="itemsPerPage"> <label for="pageNumber"
-					id="pageNumberLabel">page #</label> <input type="text"
-					id="pageNumber" class="numberInput" name="pageNumber"> <input
-					type="submit" class="btn btn-default" id="goBtn" value="Go">
-			</div>
-		</div>
-		<div class="row" class="pageBar">
-			<c:url var="searchUri"
-				value="/?page=##" />
-			<paginator:display maxLinks="5" currPage="${currPage}"
-				totalPages="${10}" uri="${searchUri}" />
-
+			<div class="col-md-2"></div>
 		</div>
 		<table class="table table-bordered">
 			<tr>
@@ -66,6 +46,15 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<div class="row paginationRow">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<c:url var="searchUri" value="/?page=##" />
+				<paginator:display maxLinks="5" currPage="${currPage}"
+					totalPages="${totalPages}" uri="${searchUri}" />
+			</div>
+			<div class="col-md-2"></div>
+		</div>
 	</div>
 </body>
 </html>

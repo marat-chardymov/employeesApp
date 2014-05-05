@@ -27,11 +27,16 @@ public final class EmployeeController {
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "itemsPerPage", defaultValue = "100") int itemsPerPage,
 			ModelMap model) throws SQLException {
-		System.out.println(page);
-		model.addAttribute("currPage", page);
-		System.out.println(itemsPerPage);
-		List<Employee> emplList = employeeDAO.getList((page-1)*itemsPerPage, 100);
+		int employeeCount = employeeDAO.countRecords();
+		int totalPages = employeeCount / itemsPerPage
+				+ (employeeCount % itemsPerPage != 0 ? 1 : 0);
+
+		// page number to begin row
+		int begin = (page - 1) * itemsPerPage;
+		List<Employee> emplList = employeeDAO.getList(begin, itemsPerPage);
 		model.addAttribute("emplList", emplList);
+		model.addAttribute("currPage", page);
+		model.addAttribute("totalPages", totalPages);
 		return "employeeList";
 	}
 

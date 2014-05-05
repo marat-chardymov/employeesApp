@@ -22,12 +22,12 @@ public class Paginator extends SimpleTagSupport {
 		Writer out = getWriter();
 
 		boolean lastPage = currPage == totalPages;
-		//first visible page in nav menu
+		// first visible page in nav menu
 		int pgStart = Math.max(currPage - maxLinks / 2, 1);
-		//last visible page in nav menu
+		// last visible page in nav menu
 		int pgEnd = pgStart + maxLinks;
-		
-		//check out of range 
+
+		// check out of range
 		if (pgEnd > totalPages + 1) {
 			int diff = pgEnd - totalPages;
 			pgStart -= diff - 1;
@@ -45,19 +45,18 @@ public class Paginator extends SimpleTagSupport {
 
 			for (int i = pgStart; i < pgEnd; i++) {
 				if (i == currPage)
-//					out.write("<li class=\"active"
-//							+ (lastPage && i == totalPages ? " paginatorLast"
-//									: "") + "\">" + currPage + "</li>");
-					out.write(constructLink(currPage, String.valueOf(currPage), "active"));
+					out.write(constructLink(currPage, String.valueOf(currPage),
+							"active"));
 				else
 					out.write(constructLink(i));
 			}
 
 			if (!lastPage)
 				out.write(constructLink(currPage + 1, "Next",
-						"paginatorNext paginatorLast"));
+						null));
 
 			out.write("</ul>");
+			out.write(constructGoToForm());
 
 		} catch (java.io.IOException ex) {
 			throw new JspException("Error in Paginator tag", ex);
@@ -79,6 +78,20 @@ public class Paginator extends SimpleTagSupport {
 				.append(uri.replace("##", String.valueOf(page))).append("\">")
 				.append(text).append("</a></li>");
 		return link.toString();
+	}
+
+	private String constructGoToForm() {
+		String context=uri.replace("/?page=##", "");
+		String goToForm = new String(
+				"<form action='"+ context+"/'>"
+						+ "<label for='itemsPerPage' class='goToLabel'>items per page</label>"
+						+ " <input type='text' class='numberInput'"
+						+ " name='itemsPerPage'> <label for='page' class='goToLabel'"
+						+ " >page #</label> <input type='text'"
+						+ " class='numberInput' name='page'> <input"
+						+ " type='submit' class='btn btn-default goBtn' value='Go'>"
+						+ "</form>");
+		return goToForm;
 	}
 
 	public void setUri(String uri) {

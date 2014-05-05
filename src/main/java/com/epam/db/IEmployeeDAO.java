@@ -7,4 +7,5 @@ import com.epam.entities.Employee;
 
 public interface IEmployeeDAO {
 	public List<Employee> getList(int begin,int numberOfElements) throws SQLException;
+	public int countRecords();
 }
