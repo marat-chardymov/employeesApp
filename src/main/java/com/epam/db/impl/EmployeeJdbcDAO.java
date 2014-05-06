@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,7 +21,8 @@ import com.epam.entities.Workplace;
 
 public class EmployeeJdbcDAO implements IEmployeeDAO {
 
-	private static final String EMPLOYEES_SQL = "SELECT employee.id as e_id,"
+	private static final String EMPLOYEES_SQL = "SELECT * FROM (SELECT rownum as rn,q.* FROM "
+			+ "(SELECT employee.id as e_id,"
 			+ "first_name as e_first_name,last_name as e_last_name,"
 			+ "address.id as address_id,address.content as address_content,"
 			+ "city.id as city_id,city.name as city_name,"
@@ -29,7 +31,8 @@ public class EmployeeJdbcDAO implements IEmployeeDAO {
 			+ " FROM employee LEFT JOIN address"
 			+ " ON employee.address_id = address.id"
 			+ " JOIN city ON address.city_id = city.id"
-			+ " JOIN country ON city.country_id = country.id WHERE rownum<=? ORDER BY e_id";
+			+ " JOIN country ON city.country_id = country.id ORDER BY e_id)q )"
+			+ " WHERE rn BETWEEN ? AND ?";
 	private static final String WORKPLACES_SQL = "select "
 			+ "workplace.EMPLOYEE_ID as w_EMPLOYEE_ID, "
 			+ "workplace.ID as w_ID, "
@@ -56,6 +59,7 @@ public class EmployeeJdbcDAO implements IEmployeeDAO {
 			+ "left outer join CITY on address.CITY_ID=city.ID "
 			+ "left outer join COUNTRY on city.COUNTRY_ID=country.ID "
 			+ "where workplace.EMPLOYEE_ID in ";
+	private static final String COUNT_SQL = "SELECT COUNT(*) as count FROM Employee";
 
 	private DataSource dataSource;
 
@@ -74,8 +78,11 @@ public class EmployeeJdbcDAO implements IEmployeeDAO {
 		LinkedHashMap<Integer, Employee> employeeMap = new LinkedHashMap<Integer, Employee>();
 		try {
 			conn = dataSource.getConnection();
+			// String query1WithParams = String.format(EMPLOYEES_SQL, begin+1,
+			// begin+numberOfElements);
 			ps1 = conn.prepareStatement(EMPLOYEES_SQL);
-			ps1.setInt(begin + 1, numberOfElements);
+			ps1.setInt(1, begin + 1);
+			ps1.setInt(2, begin + numberOfElements);
 			rs1 = ps1.executeQuery();
 
 			// second query retrives workplaces for employees
@@ -121,5 +128,33 @@ public class EmployeeJdbcDAO implements IEmployeeDAO {
 		}
 		strQuery.append("?) ORDER BY w_EMPLOYEE_ID");
 		return strQuery.toString();
+	}
+
+	@Override
+	public int countRecords() {
+		Connection conn = null;
+		Statement statement = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			conn = dataSource.getConnection();
+			statement = conn.createStatement();
+			rs = statement.executeQuery(COUNT_SQL);
+			while (rs.next()) {
+				count = rs.getInt("count");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				statement.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
 	}
 }

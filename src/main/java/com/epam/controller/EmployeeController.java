@@ -21,7 +21,7 @@ import com.epam.entities.Employee;
 public final class EmployeeController {
 
 	@Autowired
-	@Qualifier("employeeJpaDAO")
+	@Qualifier("employeeJdbcDAO")
 	private IEmployeeDAO employeeDAO;
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -31,6 +31,7 @@ public final class EmployeeController {
 			@RequestParam(value = "itemsPerPage", required = false) Integer itemsPerPage,
 			ModelMap model) throws SQLException {
 		
+		// define itemsPerPage value
 		// check if itemsPerPage is not set for current request
 		if (itemsPerPage == null) {
 			Object savedItemsPerPage = session.getAttribute("itemsPerPage");
