@@ -3,6 +3,8 @@ package com.epam.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -24,9 +26,24 @@ public final class EmployeeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String printEmplList(
+			HttpSession session,
 			@RequestParam(value = "page", defaultValue = "1") int page,
-			@RequestParam(value = "itemsPerPage", defaultValue = "100") int itemsPerPage,
+			@RequestParam(value = "itemsPerPage", required = false) Integer itemsPerPage,
 			ModelMap model) throws SQLException {
+		
+		// check if itemsPerPage is not set for current request
+		if (itemsPerPage == null) {
+			Object savedItemsPerPage = session.getAttribute("itemsPerPage");
+			// check if itemsPerPage was saved before
+			if (savedItemsPerPage != null) {
+				itemsPerPage = (int) savedItemsPerPage;
+			} else {
+				itemsPerPage = 100;
+			}
+		}else{
+			session.setAttribute("itemsPerPage", itemsPerPage);
+		}
+		
 		int employeeCount = employeeDAO.countRecords();
 		int totalPages = employeeCount / itemsPerPage
 				+ (employeeCount % itemsPerPage != 0 ? 1 : 0);
@@ -39,5 +56,4 @@ public final class EmployeeController {
 		model.addAttribute("totalPages", totalPages);
 		return "employeeList";
 	}
-
 }
