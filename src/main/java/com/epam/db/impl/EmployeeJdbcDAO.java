@@ -110,9 +110,13 @@ public class EmployeeJdbcDAO implements IEmployeeDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			rs1.close();
+			if (rs1 != null) {
+				rs1.close();
+			}
 			ps1.close();
-			rs2.close();
+			if (rs2 != null) {
+				rs2.close();
+			}
 			ps2.close();
 			conn.close();
 		}

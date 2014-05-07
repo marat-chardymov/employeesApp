@@ -19,28 +19,35 @@
 
 </head>
 <body>
+	<input type="hidden" value="${totalPages}" id="totalPages"> 
 	<div class="container">
 		<div class="row paginationRow">
 			<div class="col-md-10 col-md-offset-2">
 				<c:url var="searchUri" value="/?page=##" />
-				<paginator:display maxLinks="5" currPage="${currPage}"
+				<paginator:display maxLinks="7" currPage="${currPage}"
 					totalPages="${totalPages}" uri="${searchUri}" />
 			</div>
 		</div>
-		<table class="table table-bordered">
-			<tr>
-				<th>First name</th>
-				<th>Last name</th>
-				<th>Address</th>
-				<th>Offices</th>
-			</tr>
-			<c:forEach var="employee" items="${emplList}">
-				<tr>
-					<td>${employee.firstName}</td>
-					<td>${employee.lastName}</td>
-					<td>${employee.address.content},${employee.address.city.name},
-						${employee.address.city.country.name}</td>
-					<td><c:forEach var="workplace" items="${employee.workplaces}">
+		<c:choose>
+			<c:when test="${empty emplList}">
+					<div class="alert alert-warning">no employees found. Maybe page you enetered is out of range? Try smaller value</div>
+				</c:when>
+			<c:otherwise>
+				<table class="table table-bordered">
+					<tr>
+						<th>First name</th>
+						<th>Last name</th>
+						<th>Address</th>
+						<th>Offices</th>
+					</tr>
+					<c:forEach var="employee" items="${emplList}">
+						<tr>
+							<td>${employee.firstName}</td>
+							<td>${employee.lastName}</td>
+							<td>${employee.address.content},${employee.address.city.name},
+								${employee.address.city.country.name}</td>
+							<td><c:forEach var="workplace"
+									items="${employee.workplaces}">
 				${workplace.office.company.name},
 				${workplace.office.address.content},
 				${workplace.office.address.city.name},
@@ -48,14 +55,16 @@
 				headcount = ${workplace.office.employeeCount},
 				${workplace.position.name}
 				<br>
-						</c:forEach></td>
-				</tr>
-			</c:forEach>
-		</table>
+								</c:forEach></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:otherwise>
+		</c:choose>
 		<div class="row paginationRow">
 			<div class="col-md-10 col-md-offset-2">
 				<c:url var="searchUri" value="/?page=##" />
-				<paginator:display maxLinks="5" currPage="${currPage}"
+				<paginator:display maxLinks="7" currPage="${currPage}"
 					totalPages="${totalPages}" uri="${searchUri}" />
 			</div>
 		</div>

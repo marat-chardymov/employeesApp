@@ -15,7 +15,7 @@ public class Paginator extends SimpleTagSupport {
 
 	private Writer getWriter() {
 		JspWriter out = getJspContext().getOut();
-		
+
 		return out;
 	}
 
@@ -41,10 +41,12 @@ public class Paginator extends SimpleTagSupport {
 		try {
 			out.write("<ul class=\"pagination\">");
 
-			if (currPage > 1)
-				out.write(constructLink(currPage - 1, "Previous",
+			if (currPage > 1) {
+				out.write(constructLink(1, "First",
+						""));
+				out.write(constructLink(currPage - 1, "<",
 						"paginatorPrev"));
-
+			}
 			for (int i = pgStart; i < pgEnd; i++) {
 				if (i == currPage)
 					out.write(constructLink(currPage, String.valueOf(currPage),
@@ -53,10 +55,11 @@ public class Paginator extends SimpleTagSupport {
 					out.write(constructLink(i));
 			}
 
-			if (!lastPage)
-				out.write(constructLink(currPage + 1, "Next",
-						null));
-
+			if (!lastPage) {
+				out.write(constructLink(currPage + 1, ">", null));
+				out.write(constructLink(totalPages, "Last",
+						""));
+			}
 			out.write("</ul>");
 			out.write(constructGoToForm());
 
@@ -83,9 +86,11 @@ public class Paginator extends SimpleTagSupport {
 	}
 
 	private String constructGoToForm() {
-		String context=uri.replace("/?page=##", "");
+		String context = uri.replace("/?page=##", "");
 		String goToForm = new String(
-				"<form action='"+ context+"/'>"
+				"<form action='"
+						+ context
+						+ "/'>"
 						+ "<label for='itemsPerPage' class='goToLabel1'>items per page</label>"
 						+ " <input type='text' class='itemsInput'"
 						+ " name='itemsPerPage'> <label for='page' class='goToLabel2'"

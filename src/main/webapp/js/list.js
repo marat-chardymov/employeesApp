@@ -1,5 +1,6 @@
 $(document).ready(
 		function() {
+			var totalPages=document.getElementById('totalPages').value;
 			$('form').each(
 					function() {
 						$(this).validate(
@@ -25,7 +26,11 @@ $(document).ready(
 								});
 						$(this).find('.itemsInput').each(function() {
 							$(this).rules('add', {
-								number : true
+								number : true,
+								min : 1,
+								messages: {
+									min: "should be >=1"
+								}
 							});
 							$(this).tooltipster({
 								trigger : 'custom',
@@ -36,7 +41,12 @@ $(document).ready(
 						$(this).find('.pageInput').each(function() {
 							$(this).rules('add', {
 								required : true,
-								number : true
+								number : true,
+								min : 1,
+								max: totalPages,
+								messages: {
+									min: "should be >=1"
+								}
 							});
 							$(this).tooltipster({
 								trigger : 'custom',
