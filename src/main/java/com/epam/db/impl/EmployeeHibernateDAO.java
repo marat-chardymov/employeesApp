@@ -18,6 +18,8 @@ import com.epam.entities.Employee;
 @Transactional
 public class EmployeeHibernateDAO implements IEmployeeDAO {
 
+	private static final String COUNT_RECORDS = "SELECT COUNT(*) FROM Employee e";
+
 	@Resource
 	private SessionFactory sessionFactory;
 
@@ -30,13 +32,20 @@ public class EmployeeHibernateDAO implements IEmployeeDAO {
 	}
 
 	@Override
-	public List<Employee> getList(int begin,int numberOfElements) {
+	public List<Employee> getList(int begin, int numberOfElements) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Employee.class);
 		criteria.addOrder(Order.asc("id"));
 		criteria.setFirstResult(begin);
 		criteria.setMaxResults(numberOfElements);
 		return criteria.list();
+	}
+
+	@Override
+	public int countRecords() {
+		Session session = sessionFactory.getCurrentSession();
+		return ((Long) session.createQuery(COUNT_RECORDS).uniqueResult())
+				.intValue();
 	}
 
 }

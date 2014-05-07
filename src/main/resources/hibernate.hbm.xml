@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.epam.entities.Employee" table="EMPLOYEE"
+		batch-size="100">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">EMPLOYEES_SEQ</param>
+			</generator>
+		</id>
+		<property name="firstName" type="string">
+			<column name="FIRST_NAME" length="20" not-null="false" />
+		</property>
+		<property name="lastName" type="string">
+			<column name="LAST_NAME" length="20" not-null="false" />
+		</property>
+
+		<many-to-one name="address" column="ADDRESS_ID" unique="true"
+			lazy="false" not-null="true" fetch="join" />
+
+		<set name="workplaces" table="WORKPLACE" lazy="false" batch-size="100" >
+			<key>
+				<column name="EMPLOYEE_ID" not-null="true" />
+			</key>
+			<one-to-many entity-name="com.epam.entities.Workplace" />
+		</set>
+	</class>
+
+	<class name="com.epam.entities.Workplace" table="WORKPLACE">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">WORKPLACES_SEQ</param>
+			</generator>
+		</id>
+		<many-to-one name="position" class="com.epam.entities.Position"
+			lazy="false" fetch="join">
+			<column name="POSITION_ID" not-null="true" />
+		</many-to-one>
+		<many-to-one name="office" class="com.epam.entities.Office"
+			lazy="false" fetch="join">
+			<column name="OFFICE_ID" not-null="true" />
+		</many-to-one>
+	</class>
+
+	<class name="com.epam.entities.Position" table="POSITION">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">POSITION_SEQ</param>
+			</generator>
+		</id>
+		<property name="name" type="string">
+			<column name="NAME" length="20" not-null="true" />
+		</property>
+	</class>
+
+	<class name="com.epam.entities.Company" table="COMPANY">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">COMPANIES_SEQ</param>
+			</generator>
+		</id>
+		<property name="name" type="string">
+			<column name="NAME" length="20" not-null="true" />
+		</property>
+	</class>
+
+	<class name="com.epam.entities.Address" table="ADDRESS">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">ADDRESSES_SEQ</param>
+			</generator>
+		</id>
+		<property name="content" type="string">
+			<column name="CONTENT" length="20" not-null="true" />
+		</property>
+
+		<many-to-one name="city" class="com.epam.entities.City"
+			lazy="false" fetch="join">
+			<column name="CITY_ID" not-null="true" />
+		</many-to-one>
+	</class>
+
+	<class name="com.epam.entities.Office" table="OFFICE">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">OFFICES_SEQ</param>
+			</generator>
+		</id>
+		<many-to-one name="company" class="com.epam.entities.Company"
+			lazy="false" fetch="join">
+			<column name="COMPANY_ID" not-null="true" />
+		</many-to-one>
+		<many-to-one name="address" column="ADDRESS_ID" unique="true"
+			lazy="false" not-null="true" fetch="join" />
+		<property name="employeeCount" type="int"
+			formula="(select COUNT(*) from WORKPLACE workplace where workplace.OFFICE_ID = ID)" />
+	</class>
+
+	<class name="com.epam.entities.City" table="CITY">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">CITIES_SEQ</param>
+			</generator>
+		</id>
+		<property name="name" type="string">
+			<column name="NAME" length="20" not-null="true" />
+		</property>
+
+		<many-to-one name="country" class="com.epam.entities.Country"
+			lazy="false" fetch="join">
+			<column name="COUNTRY_ID" not-null="true" />
+		</many-to-one>
+	</class>
+
+	<class name="com.epam.entities.Country" table="COUNTRY">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">COUNTRIES_SEQ</param>
+			</generator>
+		</id>
+		<property name="name" type="string">
+			<column name="NAME" length="20" not-null="true" />
+		</property>
+	</class>
+
+</hibernate-mapping>

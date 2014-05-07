@@ -1,6 +1,7 @@
 $(document).ready(
 		function() {
 			var totalPages=document.getElementById('totalPages').value;
+			var totalPages=parseInt(totalPages, 10);
 			$('form').each(
 					function() {
 						$(this).validate(
