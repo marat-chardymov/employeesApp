@@ -7,19 +7,25 @@
 <html>
 <head>
 <title>Employees list</title>
-<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+<link rel="stylesheet" href="css/vendor/tooltipster.css" />
 <link rel="stylesheet" href="css/emplList.css" />
+
+<script type="text/javascript" src="js/vendor/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/vendor/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/vendor/jquery.tooltipster.min.js"></script>
+<script type="text/javascript" src="js/list.js"></script>
+
+
 </head>
 <body>
 	<div class="container">
 		<div class="row paginationRow">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-10 col-md-offset-2">
 				<c:url var="searchUri" value="/?page=##" />
 				<paginator:display maxLinks="5" currPage="${currPage}"
 					totalPages="${totalPages}" uri="${searchUri}" />
 			</div>
-			<div class="col-md-2"></div>
 		</div>
 		<table class="table table-bordered">
 			<tr>
@@ -47,13 +53,11 @@
 			</c:forEach>
 		</table>
 		<div class="row paginationRow">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-10 col-md-offset-2">
 				<c:url var="searchUri" value="/?page=##" />
 				<paginator:display maxLinks="5" currPage="${currPage}"
 					totalPages="${totalPages}" uri="${searchUri}" />
 			</div>
-			<div class="col-md-2"></div>
 		</div>
 	</div>
 </body>

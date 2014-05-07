@@ -2,7 +2,15 @@
 	display: inline
 }
 
-.numberInput {
+.itemsInput {
+	height: 34px;
+	width: 30px;
+	border-radius: 4px;
+	border: 1px solid #ddd;
+	font-size: 16px;
+	
+}
+.pageInput {
 	height: 34px;
 	width: 30px;
 	border-radius: 4px;
@@ -13,7 +21,10 @@
 .goBtn{
 	margin-bottom: 4px;
 }
-.goToLabel{
+.goToLabel1{
+	margin-left: 40px;
+}
+.goToLabel2{
 	margin-left: 20px;
 }
 .pagination{
@@ -21,6 +32,12 @@
 }
 
 .paginationRow{
-	margin-top: 40px;
-	margin-bottom: 40px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.tooltipster-default .tooltipster-content {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	line-height: 5px;
+	padding: 8px 10px;
 }

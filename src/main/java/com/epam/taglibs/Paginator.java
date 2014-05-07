@@ -4,6 +4,7 @@ import java.io.Writer;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class Paginator extends SimpleTagSupport {
@@ -14,6 +15,7 @@ public class Paginator extends SimpleTagSupport {
 
 	private Writer getWriter() {
 		JspWriter out = getJspContext().getOut();
+		
 		return out;
 	}
 
@@ -84,11 +86,11 @@ public class Paginator extends SimpleTagSupport {
 		String context=uri.replace("/?page=##", "");
 		String goToForm = new String(
 				"<form action='"+ context+"/'>"
-						+ "<label for='itemsPerPage' class='goToLabel'>items per page</label>"
-						+ " <input type='text' class='numberInput'"
-						+ " name='itemsPerPage'> <label for='page' class='goToLabel'"
+						+ "<label for='itemsPerPage' class='goToLabel1'>items per page</label>"
+						+ " <input type='text' class='itemsInput'"
+						+ " name='itemsPerPage'> <label for='page' class='goToLabel2'"
 						+ " >page #</label> <input type='text'"
-						+ " class='numberInput' name='page'> <input"
+						+ " class='pageInput' name='page'> <input"
 						+ " type='submit' class='btn btn-default goBtn' value='Go'>"
 						+ "</form>");
 		return goToForm;
