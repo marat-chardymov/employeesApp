@@ -36,7 +36,7 @@ $(document).ready(
 							$(this).tooltipster({
 								trigger : 'custom',
 								onlyOne : false,
-								position : 'top'
+								position : 'bottom'
 							});
 						});
 						$(this).find('.pageInput').each(function() {

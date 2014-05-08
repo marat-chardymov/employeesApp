@@ -135,4 +135,9 @@
 	<query name="COUNT_RECORDS">
        <![CDATA[SELECT COUNT(*) FROM Employee e]]>
 	</query>
+	<query name="FIND_EMPLOYEES">
+       <![CDATA[SELECT e FROM Employee e LEFT JOIN FETCH e.address a 
+       LEFT JOIN FETCH a.city city LEFT JOIN FETCH city.country country
+				 ORDER BY e.id]]>
+	</query>
 </hibernate-mapping>

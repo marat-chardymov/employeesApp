@@ -16,18 +16,12 @@ import com.epam.entities.Employee;
 @Transactional
 public class EmployeeJpaDAO implements IEmployeeDAO {
 
-	private static final String FIND_EMPLOYEES = "SELECT e FROM Employee e"
-			+ " LEFT JOIN FETCH e.address a"
-			+ " LEFT JOIN FETCH a.city city LEFT JOIN FETCH city.country country"
-			+ " ORDER BY e.id";
-	private static final String COUNT_RECORDS="SELECT COUNT(*) FROM Employee e";
-
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
 	public List<Employee> getList(int begin, int numberOfElements) {
-		Query query = em.createQuery(FIND_EMPLOYEES);
+		Query query = em.createNamedQuery("FIND_EMPLOYEES");
 		query.setFirstResult(begin);
 		query.setMaxResults(numberOfElements);
 		return query.getResultList();
@@ -35,8 +29,8 @@ public class EmployeeJpaDAO implements IEmployeeDAO {
 
 	@Override
 	public int countRecords() {
-		Query query = em.createQuery(COUNT_RECORDS);
-		return ((Long)query.getSingleResult()).intValue();
+		Query query = em.createNamedQuery("COUNT_RECORDS");
+		return ((Long) query.getSingleResult()).intValue();
 	}
 
 }

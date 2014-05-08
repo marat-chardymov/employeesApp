@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -19,6 +21,12 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
+@NamedQueries({
+		@NamedQuery(name = "FIND_EMPLOYEES", query = "SELECT e FROM Employee e"
+				+ " LEFT JOIN FETCH e.address a"
+				+ " LEFT JOIN FETCH a.city city LEFT JOIN FETCH city.country country"
+				+ " ORDER BY e.id"),
+		@NamedQuery(name = "COUNT_RECORDS", query = "SELECT COUNT(*) FROM Employee e") })
 public class Employee {
 	@Id
 	@SequenceGenerator(name = "EMPLOYEES_SEQ", sequenceName = "EMPLOYEES_SEQ", allocationSize = 1)
@@ -93,5 +101,5 @@ public class Employee {
 
 	public void setWorkplaces(Set<Workplace> workplaces) {
 		this.workplaces = workplaces;
-	}	
+	}
 }
