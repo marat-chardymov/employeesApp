@@ -20,14 +20,14 @@
 		<many-to-one name="address" column="ADDRESS_ID" unique="true"
 			lazy="false" not-null="true" fetch="join" />
 
-		<set name="workplaces" table="WORKPLACE" lazy="false" batch-size="100" >
+		<set name="workplaces" table="WORKPLACE" lazy="false" batch-size="100">
 			<key>
 				<column name="EMPLOYEE_ID" not-null="true" />
 			</key>
 			<one-to-many entity-name="com.epam.entities.Workplace" />
 		</set>
-	</class>
-
+	</class>	
+	
 	<class name="com.epam.entities.Workplace" table="WORKPLACE">
 		<id name="id" type="int">
 			<column name="ID" />
@@ -131,5 +131,8 @@
 			<column name="NAME" length="20" not-null="true" />
 		</property>
 	</class>
-
+	
+	<query name="COUNT_RECORDS">
+       <![CDATA[SELECT COUNT(*) FROM Employee e]]>
+	</query>
 </hibernate-mapping>

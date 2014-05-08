@@ -18,8 +18,6 @@ import com.epam.entities.Employee;
 @Transactional
 public class EmployeeHibernateDAO implements IEmployeeDAO {
 
-	private static final String COUNT_RECORDS = "SELECT COUNT(*) FROM Employee e";
-
 	@Resource
 	private SessionFactory sessionFactory;
 
@@ -44,7 +42,7 @@ public class EmployeeHibernateDAO implements IEmployeeDAO {
 	@Override
 	public int countRecords() {
 		Session session = sessionFactory.getCurrentSession();
-		return ((Long) session.createQuery(COUNT_RECORDS).uniqueResult())
+		return ((Long) session.getNamedQuery("COUNT_RECORDS").uniqueResult())
 				.intValue();
 	}
 
