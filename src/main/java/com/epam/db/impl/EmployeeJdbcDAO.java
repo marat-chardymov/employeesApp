@@ -21,8 +21,9 @@ import com.epam.entities.Workplace;
 
 public class EmployeeJdbcDAO implements IEmployeeDAO {
 
-	private static final String EMPLOYEES_SQL = "SELECT * FROM (SELECT rownum as rn,q.* FROM "
-			+ "(SELECT employee.id as e_id,"
+	private static final String EMPLOYEES_SQL = "select * from"
+        +" ( select row_.*,rownum rownum_ " 
+        +" from ( SELECT employee.id as e_id,"
 			+ "first_name as e_first_name,last_name as e_last_name,"
 			+ "address.id as address_id,address.content as address_content,"
 			+ "city.id as city_id,city.name as city_name,"
@@ -31,8 +32,9 @@ public class EmployeeJdbcDAO implements IEmployeeDAO {
 			+ " FROM employee LEFT JOIN address"
 			+ " ON employee.address_id = address.id"
 			+ " JOIN city ON address.city_id = city.id"
-			+ " JOIN country ON city.country_id = country.id ORDER BY e_id)q )"
-			+ " WHERE rn BETWEEN ? AND ?";
+			+ " JOIN country ON city.country_id = country.id ORDER BY e_id ) row_ " 
+        +" where rownum <= ?)" 
+    +" where rownum_ >= ?";
 	private static final String WORKPLACES_SQL = "select "
 			+ "workplace.EMPLOYEE_ID as w_EMPLOYEE_ID, "
 			+ "workplace.ID as w_ID, "
@@ -81,8 +83,8 @@ public class EmployeeJdbcDAO implements IEmployeeDAO {
 			// String query1WithParams = String.format(EMPLOYEES_SQL, begin+1,
 			// begin+numberOfElements);
 			ps1 = conn.prepareStatement(EMPLOYEES_SQL);
-			ps1.setInt(1, begin + 1);
-			ps1.setInt(2, begin + numberOfElements);
+			ps1.setInt(2, begin + 1);
+			ps1.setInt(1, begin + numberOfElements);
 			rs1 = ps1.executeQuery();
 
 			// second query retrives workplaces for employees

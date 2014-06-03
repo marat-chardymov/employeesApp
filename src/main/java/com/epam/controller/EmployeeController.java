@@ -21,7 +21,7 @@ import com.epam.entities.Employee;
 public final class EmployeeController {
 
 	@Autowired
-	@Qualifier("employeeJpaDAO")
+	@Qualifier("employeeJdbcDAO")
 	private IEmployeeDAO employeeDAO;
 
 	@RequestMapping(method = RequestMethod.GET)
